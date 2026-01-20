@@ -22,6 +22,9 @@ getElemAtLevel(int)
 # Ejercicio 2
 Dado un árbol binario de búsquedas que almacena números enteros, implementar un algoritmo que retorne la suma de todos los nodos internos del árbol.
 
+Recordatorio: Los nodos internos son los nodos que no tienen hijos (node.getLeft()==null || node.getRight()==null)
+[![Ejemplo](images/Ejemplo_ej_2.png)](images/Ejemplo_ej_2.png)
+
 # Ejercicio 3
 Dado un árbol binario de búsqueda que almacena números enteros y un valor de entrada K, implementar un algoritmo que permita obtener un listado con los valores de todas las hojas cuyo valor supere K. Por ejemplo, para el árbol de la derecha, con un valor K = 8, el resultado debería ser [9, 11].
 [![Ejercicio 3](images/Ejercicio_3.png)](images/Ejercicio_3.png)
