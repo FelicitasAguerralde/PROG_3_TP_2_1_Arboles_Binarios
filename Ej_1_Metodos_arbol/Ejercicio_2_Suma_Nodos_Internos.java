@@ -14,6 +14,8 @@ public class Ejercicio_2_Suma_Nodos_Internos {
     }
 
     private Integer sumaRec(Node actual) {
+
+        // Caso base: si el nodo es nulo, devuelve 0
         if (actual == null) {
             return 0;
         }
