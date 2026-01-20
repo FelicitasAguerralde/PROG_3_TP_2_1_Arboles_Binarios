@@ -5,10 +5,19 @@ Programación 3 - TUDAI
 Implemente la estructura de Árbol Binario para búsquedas.
 Métodos:
 ● Integer getRoot(), boolean hasElem(Integer), boolean isEmpty(), void insert(Integer),
-boolean delete(Integer), int getHeight(), void printPosOrder(), void printPreOrder(), void
-printInOrder(), List getLongestBranch(), List getFrontera(), Integer getMaxElem(), List
+boolean delete(Integer), int getHeight(), void printPosOrder(), void printPreOrder(), void printInOrder(), List getLongestBranch(), List getFrontera(), Integer getMaxElem(), List
 getElemAtLevel(int)
 1. ¿Cuál es la complejidad de cada uno de estos métodos?
+
+[![Ejercicio 1](images/Ejercicio_1.png)](images/Ejercicio_1.png)
+
+
+- Ayuda Memoria: 
+* InOrder: Ordenado (izquierda, raíz, derecha)
+* PreOrder: Visita los nodos antes que los hijos (raíz, izquierda, derecha)
+* PostOrder: visita los hijos antes que los nodos (izquierda, derecha, raíz)
+
+[![Ejemplo](images/Ejemplo_Recorrido.png)](images/Ejemplo_Recorrido.png)
 
 # Ejercicio 2
 Dado un árbol binario de búsquedas que almacena números enteros, implementar un algoritmo que retorne la suma de todos los nodos internos del árbol.
