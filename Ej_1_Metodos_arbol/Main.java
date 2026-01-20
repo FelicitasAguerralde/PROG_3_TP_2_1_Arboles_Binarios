@@ -2,6 +2,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+
+        System.out.println("---------------Ejercicio 1---------------");
         // Create a BST instance
         Tree tree = new Tree();
 
@@ -84,7 +87,29 @@ public class Main {
         tree.printInOrder();
         // Output: In-order traversal after deletion: 20 30 40 60 70 80
 
+        System.out.println("---------------Ejercicio 2---------------");
+        Tree arbol2 = new Tree();
 
+        // Insertamos elementos
+        arbol2.add(10);
+        arbol2.add(5);
+        arbol2.add(15);
+        arbol2.add(3);
+        arbol2.add(7);
 
+        /*
+              10
+             /  \
+            5    15
+           / \
+          3   7
+        */
+
+        Ejercicio_2_Suma_Nodos_Internos ejercicio =
+                new Ejercicio_2_Suma_Nodos_Internos(arbol2);
+
+        Integer suma = ejercicio.getSumaNodosInternos();
+
+        System.out.println("Suma de nodos internos: (que no tienen hijos) " + suma);
     }
 }

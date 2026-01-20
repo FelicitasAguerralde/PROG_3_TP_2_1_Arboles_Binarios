@@ -11,6 +11,7 @@ public class Tree {
         this.root = null;
     }
 
+
     //Metodos
     public Integer getRoot() {
         if (root != null) {
@@ -18,6 +19,10 @@ public class Tree {
         } else {
             return null; // Indica árbol vacío
         }
+    }
+
+    public Node getRootNode(){
+        return root;
     }
 
     //-------------Has Element----------------------
