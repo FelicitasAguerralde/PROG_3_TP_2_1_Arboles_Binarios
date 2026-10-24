@@ -36,23 +36,31 @@ public class Tree {
     }
 
     private boolean hasElemRecursive(Node node, Integer value) {
+        // 1. Llego al final de la rama y el valor no esta en el árbol
         if (node == null) {
-            return false; // Elemento no encontrado si se llega a un nodo nulo
-        } else if (value.equals(node.getValue())) {
-            return true; // Elemento encontrado si coincide con el valor del nodo
-        } else if (value < node.getValue()) {
-            return hasElemRecursive(node.getLeft(), value); // Busca en el subárbol izquierdo
-        } else {
-            return hasElemRecursive(node.getRight(), value); // Busca en el subárbol derecho
+            return false; 
+        } 
+        // 2. El valor es encontrado
+        else if (value.equals(node.getValue())) {
+            return true; 
+        } 
+        // 3. Busco por el subárbol izquierdo
+        else if (value < node.getValue()) {
+            return hasElemRecursive(node.getLeft(), value);
+        } 
+        // 4. Busco por el subárbol derecho
+        else {
+            return hasElemRecursive(node.getRight(), value);
         }
     }
 
     // ----------------Add--------------------
     public void add(Integer value) {
+        // 1. Verifico nulo
         if (value == null) {
             throw new IllegalArgumentException("El valor no puede ser null");
         }
-
+        // 2. Si el árbol está vacío, creo la raíz
         if (this.root == null) {
             this.root = new Node(value);
             return;
@@ -62,20 +70,29 @@ public class Tree {
     }
 
     private void addRecursive(Node actual, Integer value) {
+        // 1. Evito duplicados
         if (value.equals(actual.getValue())) {
-            return; // Ignora duplicados
+            return;
         }
-
+        // 2. Busco por el subárbol izquierdo
         if (value < actual.getValue()) {
+            // Si el hijo izquierdo es nulo, creo un nuevo nodo con el valor
             if (actual.getLeft() == null) {
                 actual.setLeft(new Node(value));
-            } else {
+            } 
+            // Sino continuo la búsqueda recursiva en el subárbol izquierdo
+            else {
                 addRecursive(actual.getLeft(), value);
             }
-        } else {
+        } 
+        // 3. Busco por el subárbol derecho
+        else {
+            // Si el hijo derecho es nulo, creo un nuevo nodo con el valor
             if (actual.getRight() == null) {
                 actual.setRight(new Node(value));
-            } else {
+            } 
+            // Sino continuo la búsqueda recursiva en el subárbol derecho
+            else {
                 addRecursive(actual.getRight(), value);
             }
         }
