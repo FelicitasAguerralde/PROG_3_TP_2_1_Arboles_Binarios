@@ -3,16 +3,15 @@ import java.util.List;
 
 public class Tree {
 
-    //Atributo
+    // Atributo
     private Node root;
 
-    //Constructor
+    // Constructor
     public Tree() {
         this.root = null;
     }
 
-
-    //Metodos
+    // Metodos
     public Integer getRoot() {
         if (root != null) {
             return root.getValue(); // Regresa el valor solo si root existe
@@ -21,11 +20,11 @@ public class Tree {
         }
     }
 
-    public Node getRootNode(){
+    public Node getRootNode() {
         return root;
     }
 
-    //-------------Has Element----------------------
+    // -------------Has Element----------------------
     public boolean hasElem(Integer value) {
         // Verifica si el valor o el árbol están vacíos
         if (value == null || root == null) {
@@ -48,33 +47,41 @@ public class Tree {
         }
     }
 
-    //----------------Add--------------------
+    // ----------------Add--------------------
     public void add(Integer value) {
-        if (this.root == null)
+        if (value == null) {
+            throw new IllegalArgumentException("El valor no puede ser null");
+        }
+
+        if (this.root == null) {
             this.root = new Node(value);
-        else
-            this.addRecursive(this.root, value);
+            return;
+        }
+
+        addRecursive(this.root, value);
     }
 
     private void addRecursive(Node actual, Integer value) {
-        if (actual.getValue() > value) {
+        if (value.equals(actual.getValue())) {
+            return; // Ignora duplicados
+        }
+
+        if (value < actual.getValue()) {
             if (actual.getLeft() == null) {
-                Node temp = new Node(value);
-                actual.setLeft(temp);
+                actual.setLeft(new Node(value));
             } else {
                 addRecursive(actual.getLeft(), value);
             }
-        } else if (actual.getValue() < value) {
+        } else {
             if (actual.getRight() == null) {
-                Node temp = new Node(value);
-                actual.setRight(temp);
+                actual.setRight(new Node(value));
             } else {
                 addRecursive(actual.getRight(), value);
             }
         }
     }
 
-    //--------------Delete-------------------
+    // --------------Delete-------------------
 
     public boolean delete(Integer value) {
         if (value == null || root == null) {
@@ -134,7 +141,8 @@ public class Tree {
         }
     }
 
-    // Método auxiliar para encontrar el sucesor de un nodo (el nodo más pequeño en el subárbol derecho)
+    // Método auxiliar para encontrar el sucesor de un nodo (el nodo más pequeño en
+    // el subárbol derecho)
     private Node getSuccessor(Node node) {
         Node successorParent = node;
         Node successor = node;
@@ -151,12 +159,12 @@ public class Tree {
         return successor;
     }
 
-    //-------------Is Empty---------------------
+    // -------------Is Empty---------------------
     public boolean isEmpty() {
         return this.root == null;
     }
 
-    //---------------InOrder------------
+    // ---------------InOrder------------
     public void printInOrder() {
         if (!isEmpty())
             this.printInOrder(this.root);
@@ -170,8 +178,7 @@ public class Tree {
         }
     }
 
-
-    //--------PreOrder-------------
+    // --------PreOrder-------------
     public void printPreOrder() {
         if (!isEmpty()) {
             this.printPreOrder(this.root);
@@ -186,8 +193,7 @@ public class Tree {
         }
     }
 
-
-    //--------PostOrder----------------
+    // --------PostOrder----------------
     public void printPostOrder() {
         if (!isEmpty()) {
             this.printPostOrder(this.root);
@@ -202,7 +208,7 @@ public class Tree {
         }
     }
 
-    //--------Get Height-----------
+    // --------Get Height-----------
     public int getHeight() {
         return getHeightRecursive(root);
     }
@@ -215,12 +221,13 @@ public class Tree {
             int leftHeight = getHeightRecursive(node.getLeft());
             int rightHeight = getHeightRecursive(node.getRight());
 
-            // La altura del árbol es la máxima altura de los subárboles izquierdo y derecho, más 1 por el nodo actual
+            // La altura del árbol es la máxima altura de los subárboles izquierdo y
+            // derecho, más 1 por el nodo actual
             return Math.max(leftHeight, rightHeight) + 1;
         }
     }
 
-    //--------------getLongestBranch
+    // --------------getLongestBranch
     public List<Integer> getLongestBranch() {
         List<Integer> longestBranch = new ArrayList<>();
         List<Integer> currentBranch = new ArrayList<>();
@@ -234,7 +241,8 @@ public class Tree {
         if (node == null) {
             // Si llegamos a un nodo nulo, la rama actual termina
             if (currentBranch.size() > longestBranch.size()) {
-                // Si la rama actual es más larga que la más larga encontrada hasta ahora, actualizamos la más larga
+                // Si la rama actual es más larga que la más larga encontrada hasta ahora,
+                // actualizamos la más larga
                 longestBranch.clear();
                 longestBranch.addAll(currentBranch);
             }
@@ -252,8 +260,7 @@ public class Tree {
         currentBranch.remove(currentBranch.size() - 1);
     }
 
-
-    //---------------GetFrontera--------------
+    // ---------------GetFrontera--------------
     public List<Integer> getFrontera() {
         List<Integer> frontera = new ArrayList<>();
         findFrontera(root, frontera);
@@ -275,8 +282,7 @@ public class Tree {
         findFrontera(node.getRight(), frontera);
     }
 
-
-    //------------------GetMaxElem--------------
+    // ------------------GetMaxElem--------------
     public Integer getMaxElem() {
         if (root == null) {
             return null; // Si el árbol está vacío, retornamos null
@@ -290,7 +296,7 @@ public class Tree {
         return current.getValue(); // Devolvemos el valor del nodo más a la derecha, que es el valor máximo
     }
 
-    //-------GetElemAtLevel-------------
+    // -------GetElemAtLevel-------------
     public List<Integer> getElemAtLevel(int level) {
         List<Integer> elements = new ArrayList<>();
         getElemAtLevelRecursive(root, level, 1, elements);
@@ -305,19 +311,20 @@ public class Tree {
         if (currentLevel == targetLevel) {
             elements.add(node.getValue()); // Si estamos en el nivel deseado, agregamos el valor del nodo a la lista
         } else {
-            // Exploramos recursivamente los subárboles izquierdo y derecho para el siguiente nivel
+            // Exploramos recursivamente los subárboles izquierdo y derecho para el
+            // siguiente nivel
             getElemAtLevelRecursive(node.getLeft(), targetLevel, currentLevel + 1, elements);
             getElemAtLevelRecursive(node.getRight(), targetLevel, currentLevel + 1, elements);
         }
     }
 
-    //---------------Cantidad de nodos internos--------
+    // ---------------Cantidad de nodos internos--------
     public int internalNodes() {
         int count = 0;
         if (root == null) {
             return 0; // Empty tree has 0 nodes
         } else {
-            //Recorro pre orden, si es hoja no lo agrego.
+            // Recorro pre orden, si es hoja no lo agrego.
 
         }
         return count;
@@ -335,7 +342,7 @@ public class Tree {
         }
     }
 
-    //Encontrar mayores que k
+    // Encontrar mayores que k
 
     public List<Integer> elementosMayoresQueK(int k) {
         return elementosMayoresQueKRecursivo(root, k);
@@ -343,28 +350,28 @@ public class Tree {
 
     private List<Integer> elementosMayoresQueKRecursivo(Node node, int k) {
 
-        //Si la raíz es nula, devuelvo un arrayList vacio
+        // Si la raíz es nula, devuelvo un arrayList vacio
         if (node == null) {
             return new ArrayList<>();
         }
 
-        //Armo dos arraylist, en uno voy guardando los mayores por derecha y en el otro los mayores por izquierda
+        // Armo dos arraylist, en uno voy guardando los mayores por derecha y en el otro
+        // los mayores por izquierda
         List<Integer> elementosMayoresIzquierda = elementosMayoresQueKRecursivo(node.getLeft(), k);
         List<Integer> elementosMayoresDerecha = elementosMayoresQueKRecursivo(node.getRight(), k);
 
-        //En este arreglo guardo los mayores posta
+        // En este arreglo guardo los mayores posta
         List<Integer> elementosMayores = new ArrayList<>();
         if (node.getValue() > k) {
             elementosMayores.add(node.getValue());
         }
 
-        //Agrego todos los elementos mayores por derecha y por izquierda
+        // Agrego todos los elementos mayores por derecha y por izquierda
         elementosMayores.addAll(elementosMayoresIzquierda);
         elementosMayores.addAll(elementosMayoresDerecha);
 
         return elementosMayores;
     }
-
 
     public int countInternalNodes() {
         return countInternalNodesRecursive(root);
@@ -385,5 +392,3 @@ public class Tree {
         return 0;
     }
 }
-
-
