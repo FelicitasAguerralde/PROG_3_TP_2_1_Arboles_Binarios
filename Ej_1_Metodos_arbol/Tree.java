@@ -230,17 +230,14 @@ public class Tree {
         return getHeightRecursive(root);
     }
 
-    private int getHeightRecursive(Node node) {
-        if (node == null) {
-            return 0; // Altura de un árbol vacío es 0
-        } else {
-            // Calcular la altura de los subárboles izquierdo y derecho recursivamente
-            int leftHeight = getHeightRecursive(node.getLeft());
-            int rightHeight = getHeightRecursive(node.getRight());
-
-            // La altura del árbol es la máxima altura de los subárboles izquierdo y
-            // derecho, más 1 por el nodo actual
-            return Math.max(leftHeight, rightHeight) + 1;
+    private int getHeightRecursive(Node actual) {
+        // Caso base: si el nodo es nulo, la altura es 0
+        if (actual == null) {
+            return 0; 
+        } 
+        // Caso recursivo: la altura es 1 más la altura máxima de los subárboles izquierdo y derecho
+        else {
+            return 1 + Math.max(getHeightRecursive(actual.getLeft()), getHeightRecursive(actual.getRight()));
         }
     }
 
